@@ -78,27 +78,27 @@ Datei = open(Ausgabe,"a")
 
 """
 
-P, T, Ge, I, U, iwas = np.loadtxt("160120a.dat",skiprows=5,unpack=True)
+P, T, Ge, I, U, iwas = np.loadtxt("160120b.dat",skiprows=5,unpack=True)
 
-p_opt, kov = opt.curve_fit(fit_function, I, U, sigma=1e-11*np.ones_like(U)) # Anpassung
+#p_opt, kov = opt.curve_fit(fit_function, I, U, sigma=1e-11*np.ones_like(U)) # Anpassung
 
-I_fit = np.linspace(np.amin(I),np.amax(I),10000)
-U_fit = fit_function(I_fit,*p_opt)
-hight = abs(U_fit[-1] - U_fit[0])
-Index_left = np.argwhere(U_fit >= U_fit[0] + 0.1*hight)[0][0]
-Index_right = np.argwhere(U_fit <= U_fit[-1] - 0.1*hight)[-1][0]
-Index_mid = np.argwhere(abs(I_fit - p_opt[1]) <= 1e-3)[0][0]
+#I_fit = np.linspace(np.amin(I),np.amax(I),10000)
+#U_fit = fit_function(I_fit,*p_opt)
+#hight = abs(U_fit[-1] - U_fit[0])
+#Index_left = np.argwhere(U_fit >= U_fit[0] + 0.1*hight)[0][0]
+#Index_right = np.argwhere(U_fit <= U_fit[-1] - 0.1*hight)[-1][0]
+#Index_mid = np.argwhere(abs(I_fit - p_opt[1]) <= 1e-3)[0][0]
 
-I_left = I_fit[Index_left]
-I_right = I_fit[Index_right]
-I_mid = p_opt[1]
-Delta_I_syst.append( 0.5 * abs(I_right - I_left))
-Delta_I_stat.append(np.sqrt(abs(kov[1][1])))
-I_crit.append(I_mid)
-T_max = np.amax(T)
-T_min = np.amin(T)
-Temp = 0.5*(T_max + T_min)
-Delta_T = 0.5*abs(T_max - T_min)
+#I_left = I_fit[Index_left]
+#I_right = I_fit[Index_right]
+#I_mid = p_opt[1]
+#Delta_I_syst.append( 0.5 * abs(I_right - I_left))
+#Delta_I_stat.append(np.sqrt(abs(kov[1][1])))
+#I_crit.append(I_mid)
+#T_max = np.amax(T)
+#T_min = np.amin(T)
+#Temp = 0.5*(T_max + T_min)
+#Delta_T = 0.5*abs(T_max - T_min)
 
 
 
@@ -109,7 +109,7 @@ ax1 = fig.add_subplot(111)
 #ax2 = fig.add_subplot(312)
 #ax3 = fig.add_subplot(313)
 y = np.linspace(-1,1,100)
-
+"""
 Text_a = "a = ({0:.7f} ".format(p_opt[0])
 Text_a = Text_a + r"$\pm $"
 Text_a = Text_a + "{0:.7f}".format(np.sqrt(abs(kov[0][0])))
@@ -134,22 +134,22 @@ Text_T = "T = ({0:.2f} ".format(Temp)
 Text_T = Text_T + r"$\pm $"
 Text_T = Text_T + "{0:.2f}".format(np.sqrt(Delta_T))
 Text_T = Text_T + r"$_{syst})$ K "
-
+"""
 
 #ax1.plot(I,U,"-",color="blue")
 ax1.plot(I,U,"v",markersize=8,color="blue",label="Messwerte")
-ax1.plot(I_fit,fit_function(I_fit,*p_opt),color="red",label="Fitfunktion")
-ax1.plot(I_left*np.ones_like(y),y,"--",color="black")
-ax1.plot(I_right*np.ones_like(y),y,"--",color="black",label="Sprungbreite")
-ax1.plot(p_opt[1], U_fit[Index_mid],"o",markersize=8,color="red",label="Mitte des Sprungs")
-ax1.plot(I_fit[Index_left],U_fit[Index_left],"o",markersize=8,fillstyle="none",color="black",label="10% und 90% Sprunghöhe")
-ax1.plot(I_fit[Index_right],U_fit[Index_right],"o",markersize=8,fillstyle="none",color="black")
-ax1.fill_between(np.linspace(I_left,I_right,100),100 + np.linspace(I_left,I_right,100) ,color="grey",alpha=0.25)
-ax1.fill_between(np.linspace(I_left,I_right,100),-99.9 + np.linspace(I_left,I_right,100) ,color="grey",alpha=0.25)
-ax1.fill_between(np.linspace(0,I_left,100),100 + np.linspace(0,I_left,100) ,color="blue",alpha=0.25)
-ax1.fill_between(np.linspace(0,I_left,100),-99.9 + np.linspace(0,I_left,100) ,color="blue",alpha=0.25)
-ax1.fill_between(np.linspace(I_right,100,100),100 + np.linspace(0,I_left,100) ,color="red",alpha=0.25)
-ax1.fill_between(np.linspace(I_right,100,100),-99.9 + np.linspace(0,I_left,100) ,color="red",alpha=0.25)
+#ax1.plot(I_fit,fit_function(I_fit,*p_opt),color="red",label="Fitfunktion")
+#ax1.plot(I_left*np.ones_like(y),y,"--",color="black")
+#ax1.plot(I_right*np.ones_like(y),y,"--",color="black",label="Sprungbreite")
+#ax1.plot(p_opt[1], U_fit[Index_mid],"o",markersize=8,color="red",label="Mitte des Sprungs")
+#ax1.plot(I_fit[Index_left],U_fit[Index_left],"o",markersize=8,fillstyle="none",color="black",label="10% und 90% Sprunghöhe")
+#ax1.plot(I_fit[Index_right],U_fit[Index_right],"o",markersize=8,fillstyle="none",color="black")
+#ax1.fill_between(np.linspace(I_left,I_right,100),100 + np.linspace(I_left,I_right,100) ,color="grey",alpha=0.25)
+#ax1.fill_between(np.linspace(I_left,I_right,100),-99.9 + np.linspace(I_left,I_right,100) ,color="grey",alpha=0.25)
+#ax1.fill_between(np.linspace(0,I_left,100),100 + np.linspace(0,I_left,100) ,color="blue",alpha=0.25)
+#ax1.fill_between(np.linspace(0,I_left,100),-99.9 + np.linspace(0,I_left,100) ,color="blue",alpha=0.25)
+#ax1.fill_between(np.linspace(I_right,100,100),100 + np.linspace(0,I_left,100) ,color="red",alpha=0.25)
+#ax1.fill_between(np.linspace(I_right,100,100),-99.9 + np.linspace(0,I_left,100) ,color="red",alpha=0.25)
 
 ax1.tick_params(axis='both', which='major', width=1.5,length=10,direction="in", labelsize=14)
 ax1.tick_params(axis='both', which='minor', width=1.5, length=4,direction="in", labelsize=8)
@@ -159,20 +159,20 @@ ax1.xaxis.set_minor_locator(MultipleLocator(0.05))
 ax1.yaxis.set_major_locator(MultipleLocator(0.00010))
 ax1.yaxis.set_minor_locator(MultipleLocator(0.00002))
 ax1.grid(True)
-ax1.legend(loc="upper left",fontsize=14)
+ax1.legend(loc="upper right",fontsize=14)
 ax1.set_xlabel(r"$I/A$",fontsize=14)
 ax1.set_ylabel(r"$R/\Omega$",fontsize=14)  # gemessen wurde die Spannung, aber hier entspricht 1Volt gerade 1Ohm Widerstand
-ax1.set_xlim(1.05*np.amin(I_fit),1.05*np.amax(I_fit))
-ax1.set_ylim(1.05*np.amin(U_fit),1.05*np.amax(U_fit))
-ax1.annotate(r"Fitfunktion: $R = \frac{a}{1 + \exp\left(- \frac{I - b}{c}\right)} + d$",(0.1,0.00016),fontsize=16,color="black")
-ax1.annotate("Supraleitend",(0.2,0.00023),fontsize=20,color="#2520BF")
-ax1.annotate("Übergang",(1.43,0.00035),fontsize=20,color="#4D4D4D")
-ax1.annotate("Normalleitend",(2.2,0.00023),fontsize=20,color="#C2104D")
-ax1.annotate(Text_a,(0.1,0.00011),fontsize=16,color="black")
-ax1.annotate(Text_b,(0.1,0.00007),fontsize=16,color="black")
-ax1.annotate(Text_c,(0.1,0.00003),fontsize=16,color="black")
-ax1.annotate(Text_d,(0.1,-0.00001),fontsize=16,color="black")
-ax1.annotate(Text_T,(0.1,-0.00004),fontsize=16,color="black")
+#ax1.set_xlim(1.05*np.amin(I_fit),1.05*np.amax(I_fit))
+#ax1.set_ylim(1.05*np.amin(U_fit),1.05*np.amax(U_fit))
+#ax1.annotate(r"Fitfunktion: $R = \frac{a}{1 + \exp\left(- \frac{I - b}{c}\right)} + d$",(0.1,0.00016),fontsize=16,color="black")
+#ax1.annotate("Supraleitend",(0.2,0.00023),fontsize=20,color="#2520BF")
+#ax1.annotate("Übergang",(1.43,0.00035),fontsize=20,color="#4D4D4D")
+#ax1.annotate("Normalleitend",(2.2,0.00023),fontsize=20,color="#C2104D")
+#ax1.annotate(Text_a,(0.1,0.00011),fontsize=16,color="black")
+#ax1.annotate(Text_b,(0.1,0.00007),fontsize=16,color="black")
+#ax1.annotate(Text_c,(0.1,0.00003),fontsize=16,color="black")
+#ax1.annotate(Text_d,(0.1,-0.00001),fontsize=16,color="black")
+#ax1.annotate(Text_T,(0.1,-0.00004),fontsize=16,color="black")
 
 ###############################################################################################################################################
 """
